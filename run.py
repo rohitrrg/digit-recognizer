@@ -23,16 +23,14 @@ def predict():
         image = np.asarray(bytearray(draw_decoded))
         image = cv2.imdecode(image, cv2.IMREAD_GRAYSCALE)
         resized = cv2.resize(image, (28,28), interpolation = cv2.INTER_AREA)
-        name = '/static/genda.jpg'
-        cv2.imwrite(name ,image)
+        cv2.imwrite("./static/genda.jpg" ,image)
         
         # Neural Networks
         img = (np.expand_dims(resized, 0))
         ann_result = ann_model.predict(img/255.0)
-    
 
 
-    return render_template('index.html',
+    return render_template('index.html', url1 = "./static/genda.jpg",
                            ann_result = np.argmax(ann_result, axis=1)[0], 
                            ann_probs=ann_result[0].round(2), )
 
