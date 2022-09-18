@@ -2,4 +2,4 @@ Flask
 gunicorn
 numpy
 opencv-contrib-python-headless
-keras
+tensorflow-cpu==2.5.0
