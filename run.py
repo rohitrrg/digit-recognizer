@@ -14,27 +14,27 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-# @app.route('/', methods=['POST'])
-# def predict():
-#     if request.method == 'POST':
-#         draw = request.form['url']
-#         draw = draw[init_Base64:]
-#         draw_decoded = base64.b64decode(draw)
-#         image = np.asarray(bytearray(draw_decoded))
-#         image = cv2.imdecode(image, cv2.IMREAD_GRAYSCALE)
-#         resized = cv2.resize(image, (28,28), interpolation = cv2.INTER_AREA)
-#         name = '/static/genda.jpg'
-#         cv2.imwrite(name ,image)
+@app.route('/', methods=['POST'])
+def predict():
+    if request.method == 'POST':
+        draw = request.form['url']
+        draw = draw[init_Base64:]
+        draw_decoded = base64.b64decode(draw)
+        image = np.asarray(bytearray(draw_decoded))
+        image = cv2.imdecode(image, cv2.IMREAD_GRAYSCALE)
+        resized = cv2.resize(image, (28,28), interpolation = cv2.INTER_AREA)
+        name = '/static/genda.jpg'
+        cv2.imwrite(name ,image)
         
-#         # Neural Networks
-#         img = (np.expand_dims(resized, 0))
-#         ann_result = ann_model.predict(img/255.0)
+        # Neural Networks
+        img = (np.expand_dims(resized, 0))
+        ann_result = ann_model.predict(img/255.0)
     
 
 
-#     return render_template('index.html',
-#                            ann_result = np.argmax(ann_result, axis=1)[0], 
-#                            ann_probs=ann_result[0].round(2), )
+    return render_template('index.html',
+                           ann_result = np.argmax(ann_result, axis=1)[0], 
+                           ann_probs=ann_result[0].round(2), )
 
 if __name__=="__main__":
     app.run(port="8000", debug=True)
