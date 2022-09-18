@@ -28,10 +28,11 @@ def predict():
         # Neural Networks
         img = (np.expand_dims(resized, 0))
         ann_result = ann_model.predict(img/255.0)
+        
 
 
     return render_template('index.html', url1 = "./static/genda.jpg",
-                           ann_result = np.argmax(ann_result, axis=1)[0], 
+                           ann_result = np.argmax(ann_result, axis=1)[0],
                            ann_probs=ann_result[0].round(2), )
 
 if __name__=="__main__":
