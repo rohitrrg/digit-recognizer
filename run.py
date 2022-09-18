@@ -2,7 +2,7 @@ from flask import Flask, app, render_template, request, redirect, flash, url_for
 import cv2
 import numpy as np
 import base64
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 init_Base64 = 21
 
